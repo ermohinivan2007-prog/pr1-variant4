@@ -9,3 +9,4 @@ __pycache__/
 htmlcov/
 journal.log
 .DS_Store
+journal.log
