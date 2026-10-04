@@ -177,4 +177,5 @@ def repl():
                 print("Unknown command")
 
 
-repl()
+if __name__ == "__main__":
+    repl()

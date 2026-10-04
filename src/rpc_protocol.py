@@ -63,9 +63,14 @@ def dict_to_xml(data: dict, root_name: str = "data") -> str:
     root = ET.Element(root_name)
     for k, v in data.items():
         el = ET.SubElement(root, k)
-        el.text = str(v)
+        # Убираем управляющие символы, недопустимые в XML 1.0
+        text = "" if v is None else str(v)
+        clean = "".join(
+            ch for ch in text
+            if ch == "\t" or ch == "\n" or ch == "\r" or ord(ch) >= 0x20
+        )
+        el.text = clean
     return ET.tostring(root, encoding="unicode")
-
 
 def xml_to_dict(xml_str: str) -> dict:
     if not xml_str.strip():
